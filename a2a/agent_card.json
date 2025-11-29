@@ -1,0 +1,65 @@
+{
+  "name": "financial_advisor",
+  "description": "AI-powered Financial Advisor that helps users make informed financial decisions through market research, portfolio analysis, risk assessment, and personalized recommendations.",
+  "protocolVersion": "0.2.6",
+  "url": "http://localhost:8001",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "skills": [
+    {
+      "id": "stock_price",
+      "name": "Stock Price Lookup",
+      "description": "Get current stock prices and basic market data for any symbol",
+      "inputModes": ["text/plain"],
+      "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "market_summary",
+      "name": "Market Summary",
+      "description": "Get overall market conditions including major indices and sentiment",
+      "inputModes": ["text/plain"],
+      "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "portfolio_analysis",
+      "name": "Portfolio Analysis",
+      "description": "Analyze investment portfolio composition, diversification, and sector allocation",
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "risk_assessment",
+      "name": "Risk Assessment",
+      "description": "Evaluate portfolio risk including VaR calculation and stress testing",
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "investment_recommendation",
+      "name": "Investment Recommendations",
+      "description": "Provide data-driven investment recommendations based on analysis",
+      "inputModes": ["text/plain"],
+      "outputModes": ["text/plain"]
+    },
+    {
+      "id": "financial_calculations",
+      "name": "Financial Calculations",
+      "description": "Perform financial calculations including compound interest, ROI, and Sharpe ratio",
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["text/plain", "application/json"]
+    }
+  ],
+  "authentication": {
+    "schemes": ["none"]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "provider": "Financial Agent System",
+    "tags": ["finance", "investment", "portfolio", "risk", "market"],
+    "documentation": "https://github.com/example/financial-agent-system"
+  }
+}

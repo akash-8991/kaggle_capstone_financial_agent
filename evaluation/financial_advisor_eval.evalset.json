@@ -1,0 +1,373 @@
+{
+  "eval_set_id": "financial_advisor_eval_001",
+  "name": "Financial Advisor Agent Evaluation Set",
+  "description": "Comprehensive evaluation set for testing the Financial Advisor agent's capabilities",
+  "version": "1.0.0",
+  "created_at": "2024-01-15T00:00:00Z",
+  "test_cases": [
+    {
+      "test_id": "stock_price_simple",
+      "name": "Simple Stock Price Query",
+      "description": "Test basic stock price retrieval",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "What is the current price of AAPL?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "get_stock_price",
+                "args": {"symbol": "AAPL"}
+              }
+            ],
+            "reference": "The current price of AAPL should be provided with the daily change"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["AAPL", "price"]
+      }
+    },
+    {
+      "test_id": "market_summary",
+      "name": "Market Summary Request",
+      "description": "Test market overview functionality",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "How is the market doing today?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "get_market_summary",
+                "args": {}
+              }
+            ],
+            "reference": "Market indices and overall sentiment should be provided"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["S&P", "NASDAQ"]
+      }
+    },
+    {
+      "test_id": "portfolio_analysis",
+      "name": "Portfolio Analysis",
+      "description": "Test portfolio composition analysis",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "Analyze my portfolio: 40% AAPL, 30% GOOGL, 20% MSFT, 10% cash"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "analyze_portfolio",
+                "args": {
+                  "holdings": {
+                    "AAPL": 40,
+                    "GOOGL": 30,
+                    "MSFT": 20,
+                    "CASH": 10
+                  }
+                }
+              }
+            ],
+            "reference": "Portfolio analysis with sector allocation and diversification assessment"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["Technology", "diversification", "sector"]
+      }
+    },
+    {
+      "test_id": "risk_assessment",
+      "name": "Value at Risk Calculation",
+      "description": "Test VaR calculation for portfolio",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "Calculate the VaR for a $100,000 portfolio with 50% AAPL and 50% MSFT"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "calculate_var",
+                "args": {
+                  "portfolio_value": 100000,
+                  "holdings": {"AAPL": 50, "MSFT": 50}
+                }
+              }
+            ],
+            "reference": "VaR calculation with interpretation and risk level"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["VaR", "risk", "confidence"]
+      }
+    },
+    {
+      "test_id": "compound_interest",
+      "name": "Compound Interest Calculation",
+      "description": "Test investment growth projection",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "If I invest $10,000 at 7% annual return for 20 years, how much will I have?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "calculate_compound_interest",
+                "args": {
+                  "principal": 10000,
+                  "annual_rate": 7,
+                  "years": 20
+                }
+              }
+            ],
+            "reference": "Future value calculation with compound interest"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["$", "interest", "future"]
+      }
+    },
+    {
+      "test_id": "stress_test",
+      "name": "Portfolio Stress Test",
+      "description": "Test market crash stress scenario",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "Run a market crash stress test on a $50,000 portfolio with 60% tech stocks and 40% cash"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "run_stress_test",
+                "args": {
+                  "portfolio_value": 50000,
+                  "scenario": "market_crash"
+                }
+              }
+            ],
+            "reference": "Stress test results showing projected losses under crash scenario"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["stress", "loss", "scenario"]
+      }
+    },
+    {
+      "test_id": "multi_turn_analysis",
+      "name": "Multi-turn Portfolio Advice",
+      "description": "Test multi-turn conversation with follow-up",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "Analyze my portfolio: 70% NVDA, 20% TSLA, 10% cash"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {"name": "analyze_portfolio"}
+            ],
+            "reference": "Initial portfolio analysis noting concentration"
+          },
+          {
+            "invocation_id": "turn_002",
+            "user_content": {
+              "parts": [{"text": "What's the diversification score?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {"name": "calculate_diversification_score"}
+            ],
+            "reference": "Diversification score with recommendations"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["diversification", "concentrated"]
+      }
+    },
+    {
+      "test_id": "news_research",
+      "name": "Market News Research",
+      "description": "Test news search and analysis",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "What's the latest news about tech stocks?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "search_market_news",
+                "args": {"query": "tech stocks"}
+              }
+            ],
+            "reference": "Summary of recent tech stock news with sentiment"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["news", "tech"]
+      }
+    },
+    {
+      "test_id": "rebalancing",
+      "name": "Portfolio Rebalancing Advice",
+      "description": "Test rebalancing recommendations",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "My portfolio has drifted to 80% stocks, 20% bonds. I have a moderate risk tolerance. Should I rebalance?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "suggest_rebalancing",
+                "args": {"risk_tolerance": "moderate"}
+              }
+            ],
+            "reference": "Rebalancing recommendations based on risk tolerance"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["rebalance", "allocation", "moderate"]
+      }
+    },
+    {
+      "test_id": "risk_profile",
+      "name": "Investor Risk Profile Assessment",
+      "description": "Test risk profile evaluation",
+      "session": {
+        "session_input": {
+          "app_name": "financial_advisor",
+          "user_id": "eval_user",
+          "state": {}
+        },
+        "turns": [
+          {
+            "invocation_id": "turn_001",
+            "user_content": {
+              "parts": [{"text": "I'm 35 years old, make $100,000 per year, have $200,000 in savings, and want to invest for 25 years. What's my risk profile?"}],
+              "role": "user"
+            },
+            "expected_tool_use": [
+              {
+                "name": "assess_risk_profile",
+                "args": {
+                  "age": 35,
+                  "investment_horizon_years": 25,
+                  "annual_income": 100000,
+                  "liquid_net_worth": 200000
+                }
+              }
+            ],
+            "reference": "Risk profile assessment with recommended allocation"
+          }
+        ]
+      },
+      "evaluation_criteria": {
+        "tool_trajectory_match": true,
+        "response_contains": ["risk", "allocation", "profile"]
+      }
+    }
+  ],
+  "evaluation_metrics": {
+    "tool_trajectory_avg_score": {
+      "description": "Average score for tool usage matching expected trajectory",
+      "weight": 0.5
+    },
+    "response_quality_score": {
+      "description": "Quality of the final response",
+      "weight": 0.3
+    },
+    "latency_score": {
+      "description": "Response time performance",
+      "weight": 0.2
+    }
+  }
+}
